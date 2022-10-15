@@ -4,7 +4,7 @@ namespace osu_skin_changer.lib.Validation
 {
     public class MediaFileAttribute : ValidationAttribute
     {
-        private readonly string[] _allowedExtensions = { ".png" };
+        private readonly string[] _allowedExtensions;
 
         public MediaFileAttribute(string[] allowedExtensions)
         {
