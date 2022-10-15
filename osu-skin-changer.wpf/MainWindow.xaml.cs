@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace osu_skin_changer.wpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
