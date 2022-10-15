@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace osu_skin_changer.lib.Model
 {
-    public class Skin
+    public class Skin : IValidatableObject
     {
         [Required(ErrorMessage = "Name is empty.")]
         public string Name { get; set; }
@@ -17,13 +17,22 @@ namespace osu_skin_changer.lib.Model
         [Required(ErrorMessage = "Version is empty.")]
         public string Version { get; set; }
 
-
-        [CollectionCompleteness(new string[] {}, typeof(Sound))]
         public FileCollection<Sound> InterfaceSounds { get; set; }
-
 
         public Settings Settings { get; set; }
 
         public Skin() { }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+
+            if (CollectionCompleteness<Sound>.IsCollectionCompleteness(InterfaceSounds, ExpectedContent.InterfaceSounds) == false)
+            {
+                errors.Add(new ValidationResult("Collection content is not including expected content."));
+            }
+
+            return errors;
+        }
     }
 }
